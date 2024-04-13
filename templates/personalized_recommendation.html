@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>基于协同过滤的学习资源推荐</title>
+    <!-- Bootstrap CSS CDN -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='courses.css') }}">
+
+
+    <script src="{{ url_for('static', filename='js/util.js') }}"></script>
+
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+</head>
+<body>
+
+
+<header class="fixed-top">
+<!-- 用户信息展示栏 -->
+<nav class="navbar navbar-expand-lg navbar-light" style="background-color: #191919; color: white;">
+    <div class="container-fluid">
+        <!-- 用户信息 -->
+        <div class="navbar-brand d-flex flex-row" style="color: white;">
+<!--            <p class="mr-3 mb-0">用户ID: {{ user_info.user_id }}</p>-->
+            <p class="mr-3 mb-0">{{ user_info.reviewers}}</p>
+        </div>
+
+        <form class="form-inline my-2 my-lg-0" action="{{ url_for('search_courses') }}" method="GET">
+    <input class="form-control mr-sm-2" type="text" placeholder="您想学习什么?" aria-label="Search" name="query" required>
+    <button class="btn btn-outline-primary  my-2 my-sm-0" type="submit">搜索</button>
+</form>
+
+        <!-- 右侧：按钮导航到重新登录和首页 -->
+        <div class="navbar-nav ml-auto">
+            <a class="nav-link" href="{{ url_for('index', user_id=user_info.user_id) }}" style="color: white;">返回首页</a>
+            <a class="nav-link" href="{{ url_for('login') }}" style="color: white;">重新登录</a>
+        </div>
+    </div>
+</nav>
+
+
+
+<!--导航栏 -->
+<nav class="navbar navbar-expand-lg navbar-light bg-white">
+    <div class="container-fluid d-flex justify-content-between">
+        <a id="indexLink"  class="nav-link" href="{{ url_for('index', user_id=user_info.user_id) }}" onclick="showSpinner('spinner1')">
+            所有学习资源
+            <div id="spinner1" class="spinner-border spinner-border-sm" role="status" style="display: none;">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </a>
+
+
+        <a id="personalizedLink"  class="nav-link" href="{{ url_for('personalized_recommendation', user_id=user_info.user_id) }}" onclick="showSpinner('spinner2')">
+            基于协同过滤的学习资源推荐
+            <div id="spinner2" class="spinner-border spinner-border-sm" role="status" style="display: none;">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </a>
+
+        <a id="similarUsersLink" class="nav-link" href="{{ url_for('similar_users_recommendation', user_id=user_info.user_id) }}" onclick="showSpinner('spinner3')">
+            基于聚类的学习资源推荐
+            <div id="spinner3" class="spinner-border spinner-border-sm" role="status" style="display: none;">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </a>
+
+        <a id="userRatingHistoryLink" class="nav-link" href="{{ url_for('user_courses_history', user_id=user_info.user_id) }}" onclick="showSpinner('spinner4')">
+            已学课程
+            <div id="spinner4" class="spinner-border spinner-border-sm" role="status" style="display: none;">
+                <span class="sr-only">加载中...</span>
+            </div>
+        </a>
+
+    </div>
+</nav>
+
+
+</header>
+
+<!-- 推荐课程展示 -->
+<div class="container mt-5">
+    <h2>基于协同过滤的学习资源推荐</h2>
+    <div class="row mt-3">
+        {% for course in recommendations %}
+        <div class="col-md-4">
+            <div class="card mb-4 shadow-sm custom-card">
+                <div class="card-body">
+                    <h5 class="card-title">{{ course.name }}</h5>
+                </div>
+                <div class="card-footer">
+                    <p class="card-text">{{ course.institution }}</p>
+                     <p class="card-text">
+                        <span class="average-rating">{{ course.average_rating|round(2) }}</span>
+                        <span class="star-icon">&#9733;</span>
+                    </p>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="btn-group">
+                            <a href="{{ course.course_url }}" class="btn btn-sm btn-outline-primary"
+                                target="_blank">查看课程</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+
+
+
+</body>
+</html>

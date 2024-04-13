@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Users</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='all_users.css') }}">
+
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+        <div class="container-fluid">
+    
+            <!-- 右侧：按钮导航到重新登录和首页 -->
+            <div class="navbar-nav ml-auto">
+                <a class=" btn btn-primary" href="{{ url_for('login') }}">去登录</a>
+            </div>
+        </div>
+    </nav>
+
+    <h1>所有用户</h1>
+    <div class="row mt-3">
+    <table>
+        <thead>
+            <tr>
+                <th>用户ID</th>
+                <th>用户名</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for user in users %}
+                <tr>
+                    <td>{{ user.user_id }}</td>
+                    <td>{{ user.reviewers }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    </div>
+    
+
+<!-- 分页链接 -->
+<nav aria-label="Page navigation example">
+    <ul class="pagination justify-content-center">
+
+        <li class="page-item {% if page == 1 %}disabled{% endif %}">
+            <a class="page-link" href="{{ url_for('all_users', page=1) }}" aria-label="First">
+                <span aria-hidden="true">首页</span>
+            </a>
+        </li>
+       
+        
+        {% if page > 1 %}
+            <li class="page-item">
+                <a class="page-link" href="{{ url_for('all_users', page=page-1) }}" aria-label="Previous">
+                    <span aria-hidden="true">上一页</span>
+                </a>
+            </li>
+        {% endif %}
+
+        {% for p in range(start_page, end_page+1) %}
+            <li class="page-item {% if p == page %}active{% endif %}">
+                <a class="page-link" href="{{ url_for('all_users', page=p) }}">{{ p }}</a>
+            </li>
+        {% endfor %}
+
+        {% if page < total_pages %}
+            <li class="page-item">
+                <a class="page-link" href="{{ url_for('all_users', page=page+1) }}" aria-label="Next">
+                    <span aria-hidden="true">下一页</span>
+                </a>
+            </li>
+        {% endif %}
+
+        <li class="page-item {% if page == total_pages %}disabled{% endif %}">
+            <a class="page-link" href="{{ url_for('all_users', page=total_pages) }}" aria-label="Last">
+                <span aria-hidden="true">尾页</span>
+            </a>
+        </li>
+    </ul>
+</nav>
+
+</body>
+</html>
