@@ -1,0 +1,9 @@
+body {
+    margin-top: 112px;
+    background-color: #f5f7f8;
+}
+.small-img {
+    max-width: 100%;
+    height: auto;
+    max-height: 100px; /* 根据需要调整高度 */
+}

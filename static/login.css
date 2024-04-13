@@ -1,0 +1,70 @@
+/* style.css */
+
+body {
+    font-family: Arial, sans-serif; /* 设置字体 */
+    background-color: #f8f9fa; /* 设置背景色 */
+}
+
+.container {
+    margin-top: 50px; /* 顶部外边距 */
+}
+
+.form-group {
+    margin-bottom: 20px; /* 表单组下边距 */
+}
+
+.alert {
+    margin-bottom: 20px; /* 警告框下边距 */
+}
+
+.btn-primary {
+    background-color: #007bff; /* 按钮背景色 */
+    border-color: #007bff; /* 按钮边框色 */
+    transition: background-color 0.3s ease, border-color 0.3s ease; /* 按钮背景色和边框色过渡效果 */
+}
+
+.btn-primary:hover {
+    background-color: #0056b3; /* 鼠标悬停时的背景色 */
+    border-color: #0056b3; /* 鼠标悬停时的边框色 */
+}
+
+.btn-primary:focus,
+.btn-primary.focus {
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.5); /* 按钮获取焦点时的阴影效果 */
+}
+
+h1 {
+    color: #0056d2; /* 标题颜色 */
+    text-align: center; /* 居中对齐 */
+    margin-top: 30px; /* 顶部外边距 */
+    margin-bottom: 20px; /* 底部外边距 */
+}
+
+label {
+    font-weight: bold; /* 加粗文本 */
+    color: #333; /* 文本颜色 */
+}
+
+input[type="text"] {
+    width: 100%; /* 输入框宽度 */
+    padding: 10px; /* 输入框内边距 */
+    margin-top: 5px; /* 顶部外边距 */
+    margin-bottom: 20px; /* 底部外边距 */
+    border-radius: 5px; /* 输入框圆角 */
+    border: 1px solid #ced4da; /* 输入框边框 */
+}
+
+button[type="submit"] {
+    width: 100%; /* 按钮宽度 */
+    padding: 10px; /* 按钮内边距 */
+    border: none; /* 移除按钮边框 */
+    border-radius: 5px; /* 按钮圆角 */
+    background-color: #007bff; /* 按钮背景色 */
+    color: #fff; /* 按钮文本颜色 */
+    cursor: pointer; /* 鼠标样式为指针 */
+    transition: background-color 0.3s ease; /* 按钮背景色过渡效果 */
+}
+
+button[type="submit"]:hover {
+    background-color: #0056b3; /* 鼠标悬停时的背景色 */
+}

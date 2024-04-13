@@ -1,0 +1,30 @@
+.custom-card {
+        height: 240px; /* 设置卡片的高度，根据需要调整数值 */
+        border-radius: 15px; /* 设置边框圆角，根据需要调整数值 */
+    }
+
+.custom-card .card-body {
+    height: 100%;
+}
+
+.custom-card {
+background-color: white; /* 设置卡片的背景色为白色 */
+border: none; /* 移除卡片的边框 */
+}
+
+.custom-card .card-body {
+    padding: 1.25rem; /* 调整 card-body 的内边距 */
+}
+
+.custom-card .card-footer {
+    background-color: white; /* 设置 card-footer 的背景色为白色 */
+    border-top: none; /* 移除 card-footer 与 card-body 之间的分隔线 */
+    padding: 1.25rem; /* 调整 card-footer 的内边距 */
+    border-radius: 15px; /* 设置边框圆角，根据需要调整数值 */
+}
+
+
+
+    .star-icon {
+        color: #007BFF; /* 蓝色星星颜色 */
+    }
